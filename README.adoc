@@ -1,0 +1,5 @@
+= Neo4j GenAI Workshop
+
+This repository accompanies the link:graphacademy.neo4j.com/courses/genai-workshop[Neo4j Gen-AI - Hands-on Workshop^] on link:graphacademy.neo4j.com/courses/genai-workshop[GraphAcademy^].
+
+For a complete walkthrough of this repository, link:graphacademy.neo4j.com/courses/genai-workshop[enrol now^].
