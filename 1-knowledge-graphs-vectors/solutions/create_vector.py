@@ -7,7 +7,7 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.vectorstores.neo4j_vector import Neo4jVector
 from langchain_openai import OpenAIEmbeddings
 
-COURSES_PATH = "../data/asciidoc"
+COURSES_PATH = "1-knowledge-graphs-vectors/data/asciidoc"
 
 loader = DirectoryLoader(COURSES_PATH, glob="**/lesson.adoc", loader_cls=TextLoader)
 docs = loader.load()
