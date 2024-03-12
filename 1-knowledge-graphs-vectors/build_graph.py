@@ -20,3 +20,16 @@ text_splitter = CharacterTextSplitter(
 
 chunks = text_splitter.split_documents(docs)
 
+# Create a function to get the embedding
+
+# Create a function to get the course data
+
+# Create OpenAI object
+
+# Connect to Neo4j
+
+# Create a function to run the Cypher query
+
+# Iterate through the chunks and create the graph
+
+# Close the neo4j driver
