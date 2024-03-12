@@ -2,14 +2,14 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-from langchain_community.document_loaders import DirectoryLoader
+from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain.text_splitter import CharacterTextSplitter
 from openai import OpenAI
 from neo4j import GraphDatabase
 
-COURSES_PATH = "asciidoc"
+COURSES_PATH = "1-knowledge-graphs-vectors/data/asciidoc"
 
-loader = DirectoryLoader(COURSES_PATH, glob="**/lesson.adoc")
+loader = DirectoryLoader(COURSES_PATH, glob="**/lesson.adoc", loader_cls=TextLoader)
 docs = loader.load()
 
 text_splitter = CharacterTextSplitter(

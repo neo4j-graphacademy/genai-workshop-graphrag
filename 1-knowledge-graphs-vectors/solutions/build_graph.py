@@ -2,12 +2,23 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-from langchain_community.document_loaders import DirectoryLoader
+from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain.text_splitter import CharacterTextSplitter
 from openai import OpenAI
 from neo4j import GraphDatabase
 
-COURSES_PATH = "asciidoc"
+COURSES_PATH = "1-knowledge-graphs-vectors/data/asciidoc"
+
+loader = DirectoryLoader(COURSES_PATH, glob="**/lesson.adoc", loader_cls=TextLoader)
+docs = loader.load()
+
+text_splitter = CharacterTextSplitter(
+    separator="\n\n",
+    chunk_size=1500,
+    chunk_overlap=200,
+)
+
+chunks = text_splitter.split_documents(docs)
 
 # tag::get_embedding[]
 def get_embedding(llm, text):
@@ -48,19 +59,8 @@ def create_chunk(tx, data):
         )
 # end::create_chunk[]
 
-loader = DirectoryLoader(COURSES_PATH, glob="**/lesson.adoc")
-docs = loader.load()
-
-text_splitter = CharacterTextSplitter(
-    separator="\n\n",
-    chunk_size=1500,
-    chunk_overlap=200,
-)
-
-chunks = text_splitter.split_documents(docs)
-
 # tag::openai[]
-llm = OpenAI(api_key=OPENAI_API_KEY)
+llm = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 # end::openai[]
 
 # tag::neo4j[]
