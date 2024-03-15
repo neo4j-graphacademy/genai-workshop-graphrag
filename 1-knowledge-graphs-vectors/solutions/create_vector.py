@@ -3,11 +3,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
+# tag::import_splitter[]
 from langchain.text_splitter import CharacterTextSplitter
+# end::import_splitter[]
+# tag::import_vector[]
 from langchain_community.vectorstores.neo4j_vector import Neo4jVector
 from langchain_openai import OpenAIEmbeddings
+# end::import_vector[]
 
-COURSES_PATH = "1-knowledge-graphs-vectors/data/asciidoc"
+COURSES_PATH = "llm-vectors-unstructured/data/asciidoc"
 
 loader = DirectoryLoader(COURSES_PATH, glob="**/lesson.adoc", loader_cls=TextLoader)
 docs = loader.load()
