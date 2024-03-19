@@ -2,4 +2,6 @@ python-dotenv
 openai
 langchain
 langchain_openai
+langchainhub
 neo4j
+youtube-search
