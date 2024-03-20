@@ -23,4 +23,4 @@ Tell me about the following fruit: {fruit}
 response = llm.invoke(template.format(fruit="apple"))
 
 print(response)
-# tag::invoke[]
+# end::invoke[]
