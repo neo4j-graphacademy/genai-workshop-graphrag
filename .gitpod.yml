@@ -1,6 +1,10 @@
+
 tasks:
-  - init: pip install -r requirements.txt
+  - name: Setup
+    init: |
+        pip install -r requirements.txt
+        python -m textblob.download_corpora
 vscode:
-extensions:
-  - ms-python.python
-  - ms-python.debugpy
+  extensions:
+    - ms-python.python
+    - ms-python.debugpy
