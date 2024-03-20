@@ -5,3 +5,4 @@ langchain_openai
 langchainhub
 neo4j
 youtube-search
+colorama
