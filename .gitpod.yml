@@ -3,7 +3,6 @@ tasks:
   - name: Setup
     init: |
         pip install -r requirements.txt
-        python -m textblob.download_corpora
 vscode:
   extensions:
     - ms-python.python
