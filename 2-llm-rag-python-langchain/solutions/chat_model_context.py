@@ -3,22 +3,25 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from langchain_openai import ChatOpenAI
-from langchain.prompts.prompt import PromptTemplate
-from langchain.chains import LLMChain
+from langchain_core.prompts import ChatPromptTemplate
+from langchain.schema import StrOutputParser
 
 chat_llm = ChatOpenAI(openai_api_key=os.getenv('OPENAI_API_KEY'))
 
 # tag::prompt[]
-prompt = PromptTemplate(
-    template="""You are a surfer dude, having a conversation about the surf conditions on the beach.
-Respond using surfer slang.
-
-Context: {context}
-Question: {question}
-""",
-    input_variables=["context", "question"],
+prompt = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            "You are a surfer dude, having a conversation about the surf conditions on the beach. Respond using surfer slang.",
+        ),
+        ( "system", "{context}" ),
+        ( "human", "{question}" ),
+    ]
 )
 # end::prompt[]
+
+chat_chain = prompt | chat_llm | StrOutputParser()
 
 # tag::context[]
 current_weather = """
@@ -30,11 +33,6 @@ current_weather = """
         ]
     }"""
 # end::context[]
-
-chat_chain = LLMChain(
-    llm=chat_llm, 
-    prompt=prompt
-    )
 
 # tag::invoke[]
 response = chat_chain.invoke(

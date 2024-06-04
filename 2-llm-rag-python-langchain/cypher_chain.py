@@ -35,4 +35,4 @@ cypher_chain = GraphCypherQAChain.from_llm(
     verbose=True
 )
 
-cypher_chain.invoke({"query": "What role did Tom Hanks play in Toy Story?"})
+cypher_chain.invoke({"query": "What is the plot of the movie Toy Story?"})

@@ -3,24 +3,25 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from langchain_openai import ChatOpenAI
-from langchain.prompts.prompt import PromptTemplate
-from langchain.chains import LLMChain
+from langchain_core.prompts import ChatPromptTemplate
+from langchain.schema import StrOutputParser
 
 chat_llm = ChatOpenAI(openai_api_key=os.getenv('OPENAI_API_KEY'))
 
-prompt = PromptTemplate(
-    template="""You are a surfer dude, having a conversation about the surf conditions on the beach.
-Respond using surfer slang.
-
-Question: {question}
-""",
-    input_variables=["question"],
+prompt = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            "You are a surfer dude, having a conversation about the surf conditions on the beach. Respond using surfer slang.",
+        ),
+        (
+            "human", 
+            "{question}"
+        ),
+    ]
 )
 
-chat_chain = LLMChain(
-    llm=chat_llm, 
-    prompt=prompt
-    )
+chat_chain = prompt | chat_llm | StrOutputParser()
 
 response = chat_chain.invoke({"question": "What is the weather like?"})
 
