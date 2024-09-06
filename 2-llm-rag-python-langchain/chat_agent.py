@@ -48,7 +48,7 @@ tools = [
 ]
 agent_prompt = hub.pull("hwchase17/react-chat")
 agent = create_react_agent(llm, tools, agent_prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools)
+agent_executor = AgentExecutor(agent=agent, tools=tools) # use verbose=True to see the agent workflow
 
 chat_agent = RunnableWithMessageHistory(
     agent_executor,
