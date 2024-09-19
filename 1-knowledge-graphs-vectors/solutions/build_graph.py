@@ -39,55 +39,28 @@ logging.config.dictConfig(
     }
 )
 
-# ================================
-# === 1. Creating the Pipeline ===
-# ================================
-
-# First we create the pipeline.
-# The pipeline allows us to chain various components, such as text splitters, embedders,
-# and LLM graph extractors together in order to build a knowledge graph
+# 1. Create the pipeline
 # tag::create_pipeline[]
 pipe = Pipeline()
 # end::create_pipeline[]
 
 
-# ============================
-# === 2. Chunking the Text ===
-# ============================
-
-# The first step in the pipeline is to split the text into chunks.
-# We create a text splitter component then add it to the pipeline.
+# 2. Chunk the text
 # tag::split_text[]
 text_splitter = FixedSizeSplitter(chunk_size=200, chunk_overlap=20)
 pipe.add_component(text_splitter, "text_splitter")
 # end::split_text[]
 
 
-# ===============================
-# === 3. Embedding the Chunks ===
-# ===============================
-
-# The next step is to create an embedding for each chunk.
-# We create a chunk embedder component then add it to the pipeline.
-# We then connect the text splitter to the embedder to let the pipeline know we want to
-# feed the chunks created by the text splitter into the embedder.
+# 3. Embed the chunks
 # tag::embed_chunks[]
 embedder = TextChunkEmbedder(embedder=OpenAIEmbeddings(model="text-embedding-3-large"))
 pipe.add_component(embedder, "embedder")
 pipe.connect("text_splitter", "embedder", input_config={"text_chunks": "text_splitter"})
 # end::embed_chunks[]
 
-# =============================================================
-# === 4. Extracting Nodes and Relationships from the Chunks ===
-# =============================================================
 
-# Now we use an LLM to extract nodes and relationships from each chunk.
-# We create a LLM extractor component then add it to the pipeline.
-# We then connect the embedder to the LLM extractor component to let the pipeline know
-# we want to feed the chunks and their embeddings created by the embedder into the LLM.
-# We need an embeddings model in order to create embeddings from our chunks.
-# We can use the OpenAI text-embedding-3-large model for this.
-
+# 4. Extract nodes and relationships from the chunks
 # tag::use_llm_extractor[]
 llm = LLMEntityRelationExtractor(
     llm=OpenAILLM(
@@ -104,16 +77,7 @@ pipe.connect("embedder", "llm", input_config={"chunks": "embedder"})
 # end::use_llm_extractor[]
 
 
-# =======================================
-# === 5. Creating the Knowledge Graph ===
-# =======================================
-
-# Finally we upload everything to Neo4j in order to build our knowledge graph.
-# We first Neo4j driver instance to connect to our database.
-# We create a Neo4j write component then add it to the pipeline.
-# We then connect to LLM extractor to the Neo4j writer component to let the pipeline
-# know we want to write the nodes, relationships, chunks, and embeddings we extracted in
-# previous steps to the Neo4j database.
+# 5. Create the knowledge graph
 # tag::write_graph[]
 URI = os.getenv("NEO4J_URI")
 AUTH = (os.getenv("NEO4J_USERNAME"), os.getenv("NEO4J_PASSWORD"))
@@ -128,11 +92,7 @@ pipe.connect(
 # end::write_graph[]
 
 
-# ===============================
-# === 6. Running the Pipeline ===
-# ===============================
-
-# Finally we feed our input to the pipeline then run it to create our knowledge graph
+# 6. Run the pipeline
 # tag::run_pipeline[]
 text = """
 London is the capital and largest city of both England and the United Kingdom, with a
