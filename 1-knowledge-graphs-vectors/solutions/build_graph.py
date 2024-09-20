@@ -112,4 +112,3 @@ London, governed by 33 local authorities and the Greater London Authority.
 asyncio.run(pipe.run({"text_splitter": {"text": text}}))
 driver.close()
 # end::run_pipeline[]
-

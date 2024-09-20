@@ -2,6 +2,7 @@ import asyncio
 import logging.config
 import os
 
+from dotenv import load_dotenv
 from neo4j import GraphDatabase
 from neo4j_graphrag.embeddings.openai import OpenAIEmbeddings
 from neo4j_graphrag.experimental.components.embedder import TextChunkEmbedder
@@ -15,6 +16,8 @@ from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter i
 )
 from neo4j_graphrag.experimental.pipeline import Pipeline
 from neo4j_graphrag.llm import OpenAILLM
+
+load_dotenv()
 
 # Set log level to DEBUG for all neo4j_graphrag.* loggers
 logging.config.dictConfig(
