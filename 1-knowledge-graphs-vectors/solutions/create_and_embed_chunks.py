@@ -1,8 +1,12 @@
 import asyncio
 
+from dotenv import load_dotenv
+from neo4j_graphrag.embeddings.openai import OpenAIEmbeddings
 from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter import (
     FixedSizeSplitter,
 )
+
+load_dotenv()
 
 text = """
 London is the capital and largest city of both England and the United Kingdom, with a
@@ -20,6 +24,17 @@ Hertfordshire, which since 1965 has largely comprised the administrative area of
 London, governed by 33 local authorities and the Greater London Authority.
 """
 
-
+# 1. Split text into chunks
+# tag::create_chunks[]
 text_splitter = FixedSizeSplitter(chunk_size=100, chunk_overlap=10)
-print(asyncio.run(text_splitter.run(text=text)))
+chunks = asyncio.run(text_splitter.run(text=text)).chunks
+print(chunks)
+# end::create_chunks[]
+
+
+# 2. Create embeddings from chunks
+# tag::embed_chunks[]
+embedder = OpenAIEmbeddings(model="text-embedding-3-large")
+for chunk in chunks[:1]:
+    print(embedder.embed_query(chunk))
+# tag::embed_chunks[]
