@@ -1,5 +1,5 @@
-= Neo4j GenAI Workshop
+= Mastering Retrieval-Augmented Generation with the Neo4j GraphRAG Package
 
-This repository accompanies the link:graphacademy.neo4j.com/courses/genai-workshop[Neo4j Gen-AI - Hands-on Workshop^] on link:graphacademy.neo4j.com/courses/genai-workshop[GraphAcademy^].
+This repository accompanies the link:graphacademy.neo4j.com/courses/genai-workshop[Mastering Retrieval-Augmented Generation with the Neo4j GraphRAG Package^] on link:graphacademy.neo4j.com/courses/genai-workshop[GraphAcademy^].
 
 For a complete walkthrough of this repository, link:graphacademy.neo4j.com/courses/genai-workshop[enrol now^].
