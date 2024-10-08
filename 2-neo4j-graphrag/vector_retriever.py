@@ -2,25 +2,9 @@ import logging.config
 
 from neo4j import GraphDatabase
 
-# Set log level to DEBUG for all neo4j_graphrag.* loggers
-logging.config.dictConfig(
-    {
-        "version": 1,
-        "handlers": {
-            "console": {
-                "class": "logging.StreamHandler",
-            }
-        },
-        "loggers": {
-            "root": {
-                "handlers": ["console"],
-            },
-            "neo4j_graphrag": {
-                "level": "DEBUG",
-            },
-        },
-    }
-)
+from dotenv import load_dotenv
+load_dotenv()
+
 # Connect to Neo4j database
 uri = os.getenv("NEO4J_URI")
 username = os.getenv("NEO4J_USERNAME")

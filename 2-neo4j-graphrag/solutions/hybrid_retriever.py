@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 # tag::setup[]
 from neo4j import GraphDatabase
 uri = os.getenv("NEO4J_URI")
