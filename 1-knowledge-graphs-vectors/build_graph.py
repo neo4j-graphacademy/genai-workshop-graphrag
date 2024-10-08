@@ -1,6 +1,8 @@
 import asyncio
 import logging.config
+import os
 
+from dotenv import load_dotenv
 from neo4j import GraphDatabase
 from neo4j_graphrag.embeddings import OpenAIEmbeddings
 from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter import (
