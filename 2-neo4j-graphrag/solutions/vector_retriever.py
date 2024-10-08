@@ -1,8 +1,8 @@
 # tag::setup[]
 from neo4j import GraphDatabase
-uri = "neo4j+s://demo.neo4jlabs.com"
-username = "recommendations"
-password = "recommendations"
+uri = os.getenv("NEO4J_URI")
+username = os.getenv("NEO4J_USERNAME")
+password = os.getenv("NEO4J_PASSWORD")
 driver = GraphDatabase.driver(uri, auth=(username, password))
 # end::setup[]
 
@@ -10,7 +10,6 @@ driver = GraphDatabase.driver(uri, auth=(username, password))
 import os
 from neo4j_graphrag.embeddings.openai import OpenAIEmbeddings
 
-os.environ["OPENAI_API_KEY"] = "sk-…"
 embedder = OpenAIEmbeddings(model="text-embedding-ada-002")
 # end::embedder[]
 
@@ -23,7 +22,8 @@ retriever = VectorRetriever(
     index_name="moviePlotsEmbedding",
     embedder=embedder,
     return_properties=["title", "plot"],
-)# end::retriever[]
+)
+# end::retriever[]
 
 # tag::graphrag[]
 from neo4j_graphrag.generation import GraphRAG

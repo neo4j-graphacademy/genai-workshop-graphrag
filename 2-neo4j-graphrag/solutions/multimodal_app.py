@@ -6,18 +6,41 @@ from neo4j_graphrag.embeddings import SentenceTransformerEmbeddings
 from neo4j_graphrag.retrievers import VectorCypherRetriever
 from neo4j_graphrag.types import RetrieverResultItem
 
-uri = "neo4j+s://demo.neo4jlabs.com"
-username = "recommendations"
-password = "recommendations"
+uri = os.getenv("NEO4J_URI")
+username = os.getenv("NEO4J_USERNAME")
+password = os.getenv("NEO4J_PASSWORD")
 driver = GraphDatabase.driver(uri, auth=(username, password))
 
 
-os.environ["OPENAI_API_KEY"] = "sk-…"
-os.environ["TOKENIZERS_PARALLELISM"] = "true"
+# Set log level to DEBUG for all neo4j_graphrag.* loggers
+logging.config.dictConfig(
+    {
+        "version": 1,
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+            }
+        },
+        "loggers": {
+            "root": {
+                "handlers": ["console"],
+            },
+            "neo4j_graphrag": {
+                "level": "DEBUG",
+            },
+        },
+    }
+)
 
-POSTER_INDEX_NAME = "moviePostersEmbedding"
+
+# tag::embedder[]
 IMAGE_EMBEDDING_MODEL = "clip-ViT-B-32"
+embedder = SentenceTransformerEmbeddings(IMAGE_EMBEDDING_MODEL)
+# end::embedder[]
 
+# tag::retriever[]
+POSTER_INDEX_NAME = "moviePostersEmbedding"
+retrieval_query = "RETURN node.title as title, node.plot as plot, node.poster as posterUrl, score"
 
 def format_record_function(record: neo4j.Record) -> RetrieverResultItem:
     return RetrieverResultItem(
@@ -30,9 +53,6 @@ def format_record_function(record: neo4j.Record) -> RetrieverResultItem:
         },
     )
 
-
-embedder = SentenceTransformerEmbeddings(IMAGE_EMBEDDING_MODEL)
-retrieval_query = "RETURN node.title as title, node.plot as plot, node.poster as posterUrl, score"
 retriever = VectorCypherRetriever(
     driver,
     index_name=POSTER_INDEX_NAME,
@@ -40,7 +60,6 @@ retriever = VectorCypherRetriever(
     result_formatter=format_record_function,
     embedder=embedder,
 )
-
 
 query_text = ("Find a movie where in the poster there are only animals without people")
 top_k = 3
@@ -52,3 +71,4 @@ for r in result.items:
     print(r.metadata["poster"])
 
 driver.close()
+# end::retriever[]

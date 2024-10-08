@@ -1,16 +1,14 @@
 from neo4j import GraphDatabase
 
 # Demo database credentials
-URI = "neo4j+s://demo.neo4jlabs.com"
-AUTH = ("recommendations", "recommendations")
-
-# Connect to Neo4j database
-driver = GraphDatabase.driver(URI, auth=AUTH)
+uri = os.getenv("NEO4J_URI")
+username = os.getenv("NEO4J_USERNAME")
+password = os.getenv("NEO4J_PASSWORD")
+driver = GraphDatabase.driver(uri, auth=(username, password))
 
 import os
 from neo4j_graphrag.embeddings.openai import OpenAIEmbeddings
 
-os.environ["OPENAI_API_KEY"] = "sk-…"
 embedder = OpenAIEmbeddings(model="text-embedding-ada-002")
 
 from neo4j_graphrag.retrievers import HybridCypherRetriever
