@@ -77,7 +77,7 @@ llm = OpenAILLM(
 
 # 5. Create the pipeline
 # tag::create_pipeline[]
-kg_builder = SimpleKGPipeline(
+pipeline = SimpleKGPipeline(
     llm=llm,
     driver=driver,
     embedder=embedder,
@@ -93,7 +93,7 @@ kg_builder = SimpleKGPipeline(
 # 6. Run the pipeline
 # tag::run_pipeline[]
 asyncio.run(
-    kg_builder.run_async(
+    pipeline.run_async(
         text=(
             "The son of Duke Leto Atreides and the Lady Jessica, Paul is the heir of "
             "House Atreides, an aristocratic family that rules the planet Caladan. Lady "
