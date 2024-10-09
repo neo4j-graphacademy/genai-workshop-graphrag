@@ -37,4 +37,4 @@ print(chunks)
 embedder = OpenAIEmbeddings(model="text-embedding-3-large")
 for chunk in chunks[:1]:
     print(embedder.embed_query(chunk))
-# tag::embed_chunks[]
+# end::embed_chunks[]
