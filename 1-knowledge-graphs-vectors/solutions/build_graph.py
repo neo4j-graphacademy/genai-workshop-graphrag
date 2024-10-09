@@ -72,6 +72,7 @@ llm = OpenAILLM(
         "max_tokens": 2000,
         "response_format": {"type": "json_object"},
         "temperature": 0.0,
+        "seed": 123
     },
 )
 # end::llm[]
