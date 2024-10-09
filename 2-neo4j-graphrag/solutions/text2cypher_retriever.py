@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -13,7 +14,6 @@ driver = GraphDatabase.driver(uri, auth=(username, password))
 # end::setup[]
 
 # tag::embedder[]
-import os
 from neo4j_graphrag.embeddings.openai import OpenAIEmbeddings
 
 embedder = OpenAIEmbeddings(model="text-embedding-ada-002")
