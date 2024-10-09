@@ -80,12 +80,13 @@ llm = OpenAILLM(
 # 5. Create the pipeline
 # tag::create_pipeline[]
 pipeline = SimpleKGPipeline(
-    llm=llm,
     driver=driver,
+    text_splitter=text_splitter,
     embedder=embedder,
     entities=entities,
-    text_splitter=text_splitter,
     relations=relations,
+    potential_schema=potential_schema,
+    llm=llm,
     on_error="IGNORE",
     from_pdf=False,
 )
