@@ -104,5 +104,5 @@ asyncio.run(
         )
     )
 )
-driver.close()
 # end::run_pipeline[]
+driver.close()

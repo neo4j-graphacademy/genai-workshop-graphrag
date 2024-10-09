@@ -55,3 +55,6 @@ driver = GraphDatabase.driver(URI, auth=AUTH)
 
 
 # 6. Run the pipeline
+
+
+driver.close()
