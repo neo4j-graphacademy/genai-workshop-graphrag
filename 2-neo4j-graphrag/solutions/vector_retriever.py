@@ -23,7 +23,7 @@ from neo4j_graphrag.retrievers import VectorRetriever
 # Build the retriever
 retriever = VectorRetriever(
     driver,
-    index_name="moviePlotsEmbedding",
+    index_name="moviePlots",
     embedder=embedder,
     return_properties=["title", "plot"],
 )
@@ -35,7 +35,7 @@ from neo4j_graphrag.llm import OpenAILLM
 
 llm = OpenAILLM(model_name="gpt-4o", model_params={"temperature": 0})
 rag = GraphRAG(retriever=retriever, llm=llm)
-query_text = "A movie about the famous Titanic ship"
+query_text = "Give me 3 films where a hero goes on a journey"
 response = rag.search(query_text=query_text, retriever_config={"top_k": 5})
 print(response.answer)
 # end::graphrag[]

@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
 from neo4j import GraphDatabase
 
 # Demo database credentials
@@ -15,18 +18,19 @@ embedder = OpenAIEmbeddings(model="text-embedding-ada-002")
 
 # tag::retriever[]
 from neo4j_graphrag.retrievers import HybridCypherRetriever
+from neo4j_graphrag.llm import OpenAILLM
 
 retrieval_query = """
-MATCH (actor:Actor)-[:ACTED_IN]->(movie:Movie)
-RETURN movie.title AS movie_title,
-       movie.plot AS movie_plot,
+MATCH (actor:Actor)-[:ACTED_IN]->(node:Movie)
+RETURN node.title AS movie_title,
+       node.plot AS movie_plot,
        collect(actor.name) AS actors;
 """
 
 retriever = HybridCypherRetriever(
     driver=driver,
-    vector_index_name="moviePlotsEmbedding",
-    fulltext_index_name="movieFulltext",
+    vector_index_name="moviePlots",
+    fulltext_index_name="plotFulltext",
     retrieval_query=retrieval_query,
     embedder=embedder,
 )

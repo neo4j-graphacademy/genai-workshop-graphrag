@@ -13,12 +13,6 @@ driver = GraphDatabase.driver(uri, auth=(username, password))
 
 # end::setup[]
 
-# tag::embedder[]
-from neo4j_graphrag.embeddings.openai import OpenAIEmbeddings
-
-embedder = OpenAIEmbeddings(model="text-embedding-ada-002")
-# end::embedder[]
-
 # tag::retriever[]
 from neo4j_graphrag.retrievers import Text2CypherRetriever
 from neo4j_graphrag.llm import OpenAILLM

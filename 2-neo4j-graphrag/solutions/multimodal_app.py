@@ -15,34 +15,13 @@ password = os.getenv("NEO4J_PASSWORD")
 driver = GraphDatabase.driver(uri, auth=(username, password))
 
 
-# Set log level to DEBUG for all neo4j_graphrag.* loggers
-logging.config.dictConfig(
-    {
-        "version": 1,
-        "handlers": {
-            "console": {
-                "class": "logging.StreamHandler",
-            }
-        },
-        "loggers": {
-            "root": {
-                "handlers": ["console"],
-            },
-            "neo4j_graphrag": {
-                "level": "DEBUG",
-            },
-        },
-    }
-)
-
-
 # tag::embedder[]
 IMAGE_EMBEDDING_MODEL = "clip-ViT-B-32"
 embedder = SentenceTransformerEmbeddings(IMAGE_EMBEDDING_MODEL)
 # end::embedder[]
 
 # tag::retriever[]
-POSTER_INDEX_NAME = "moviePostersEmbedding"
+POSTER_INDEX_NAME = "moviePosters"
 retrieval_query = "RETURN node.title as title, node.plot as plot, node.poster as posterUrl, score"
 
 def format_record_function(record: neo4j.Record) -> RetrieverResultItem:
