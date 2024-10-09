@@ -59,7 +59,7 @@ potential_schema = [
     ("Person", "PARENT_OF", "Person"),
     ("Person", "HEIR_OF", "House"),
     ("House", "RULES", "Planet"),
-    ("Person", "RULES", "Organization"),
+    ("Person", "MEMBER_OF", "Organization"),
 ]
 # end::schema[]
 
@@ -100,8 +100,8 @@ asyncio.run(
         text=(
             "The son of Duke Leto Atreides and the Lady Jessica, Paul is the heir of "
             "House Atreides, an aristocratic family that rules the planet Caladan. Lady "
-            "Jessica is a Bene Gesserit and an important key in the Bene Gesserit breeding "
-            "program."
+            "Jessica is a Bene Gesserit and an important key in the Bene Gesserit "
+            "breeding program."
         )
     )
 )
