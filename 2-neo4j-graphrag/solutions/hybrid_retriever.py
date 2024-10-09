@@ -38,3 +38,4 @@ query_text = "What is the name of the movie set in 1375 in Imperial China?"
 response = rag.search(query_text=query_text, retriever_config={"top_k": 5})
 print(response.answer)
 # end::graphrag[]
+driver.close()
