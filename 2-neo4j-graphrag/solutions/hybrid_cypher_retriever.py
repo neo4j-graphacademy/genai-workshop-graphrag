@@ -6,11 +6,14 @@ username = os.getenv("NEO4J_USERNAME")
 password = os.getenv("NEO4J_PASSWORD")
 driver = GraphDatabase.driver(uri, auth=(username, password))
 
+# tag::embedder[]
 import os
 from neo4j_graphrag.embeddings.openai import OpenAIEmbeddings
 
 embedder = OpenAIEmbeddings(model="text-embedding-ada-002")
+# end::embedder[]
 
+# tag::retriever[]
 from neo4j_graphrag.retrievers import HybridCypherRetriever
 
 retrieval_query = """
@@ -27,7 +30,9 @@ retriever = HybridCypherRetriever(
     retrieval_query=retrieval_query,
     embedder=embedder,
 )
+# end::retriever[]
 
+# tag::graphrag[]
 from neo4j_graphrag.generation import GraphRAG
 
 llm = OpenAILLM(model_name="gpt-4o", model_params={"temperature": 0})
@@ -35,3 +40,4 @@ rag = GraphRAG(retriever=retriever, llm=llm)
 query_text = "What are the names of the actors in the movie set in 1375 in Imperial China?"
 response = rag.search(query_text=query_text, retriever_config={"top_k": 5})
 print(response.answer)
+# end::graphrag[]
