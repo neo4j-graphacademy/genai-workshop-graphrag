@@ -54,9 +54,9 @@ embedder = OpenAIEmbeddings(model="text-embedding-3-large")
 # 3. List entities and relationships to extract
 # tag::schema[]
 entities = ["Person", "House", "Planet", "Organization"]
-relations = ["PARENT_OF", "HEIR_OF", "RULES", "MEMBER_OF"]
+relations = ["SON_OF", "HEIR_OF", "RULES", "MEMBER_OF"]
 potential_schema = [
-    ("Person", "PARENT_OF", "Person"),
+    ("Person", "SON_OF", "Person"),
     ("Person", "HEIR_OF", "House"),
     ("House", "RULES", "Planet"),
     ("Person", "MEMBER_OF", "Organization"),
@@ -71,7 +71,7 @@ llm = OpenAILLM(
     model_params={
         "max_tokens": 2000,
         "response_format": {"type": "json_object"},
-        "temperature": 0,
+        "temperature": 0.0,
     },
 )
 # end::llm[]
