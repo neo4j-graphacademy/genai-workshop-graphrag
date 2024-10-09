@@ -1,3 +1,4 @@
+import os
 from neo4j import GraphDatabase
 
 # Demo database credentials
@@ -7,7 +8,6 @@ password = os.getenv("NEO4J_PASSWORD")
 driver = GraphDatabase.driver(uri, auth=(username, password))
 
 # tag::embedder[]
-import os
 from neo4j_graphrag.embeddings.openai import OpenAIEmbeddings
 
 embedder = OpenAIEmbeddings(model="text-embedding-ada-002")
