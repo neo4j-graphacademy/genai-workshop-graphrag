@@ -30,7 +30,7 @@ collect(actor.name) AS actors;
 
 retriever = VectorCypherRetriever(
     driver,
-    index_name="moviePlotsEmbedding",
+    index_name="moviePlots",
     embedder=embedder,
     retrieval_query=retrieval_query,
 )

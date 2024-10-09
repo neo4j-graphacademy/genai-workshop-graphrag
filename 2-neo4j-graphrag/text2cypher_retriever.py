@@ -13,10 +13,7 @@ password = os.getenv("NEO4J_PASSWORD")
 driver = GraphDatabase.driver(uri, auth=(username, password))
 
 
-# 1. Initialize the Embedder
+# 1. Initialize the Text2CypherRetriever
 
 
-# 2. Initialize the Text2CypherRetriever
-
-
-# 3. Using the Retriever
+# 2. Using the Retriever
