@@ -51,6 +51,4 @@ result = retriever.search(query_text=query_text, top_k=top_k)
 for r in result.items:
     print(r.content, r.metadata.get("score"))
     print(r.metadata["poster"])
-
-driver.close()
 # end::retriever[]

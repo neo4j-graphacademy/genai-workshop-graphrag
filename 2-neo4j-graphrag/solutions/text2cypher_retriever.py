@@ -61,3 +61,4 @@ query_text = "Which movies did Hugo Weaving star in?"
 response = rag.search(query_text=query_text)
 print(response.answer)
 # end::graphrag[]
+driver.close()

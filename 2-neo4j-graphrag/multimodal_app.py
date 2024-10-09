@@ -19,3 +19,6 @@ driver = GraphDatabase.driver(uri, auth=(username, password))
 
 
 # 2. Initialize the VectorCypherRetriever
+
+
+driver.close()

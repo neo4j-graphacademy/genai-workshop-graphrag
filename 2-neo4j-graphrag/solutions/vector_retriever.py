@@ -39,3 +39,4 @@ query_text = "Give me 3 films where a hero goes on a journey"
 response = rag.search(query_text=query_text, retriever_config={"top_k": 5})
 print(response.answer)
 # end::graphrag[]
+driver.close()

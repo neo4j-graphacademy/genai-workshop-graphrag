@@ -22,3 +22,5 @@ driver = GraphDatabase.driver(uri, auth=(username, password))
 
 # 3. Using the Retriever
 
+
+driver.close()

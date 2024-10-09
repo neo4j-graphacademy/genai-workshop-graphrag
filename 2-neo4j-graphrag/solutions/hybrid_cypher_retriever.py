@@ -45,3 +45,4 @@ query_text = "What are the names of the actors in the movie set in 1375 in Imper
 response = rag.search(query_text=query_text, retriever_config={"top_k": 5})
 print(response.answer)
 # end::graphrag[]
+driver.close()
