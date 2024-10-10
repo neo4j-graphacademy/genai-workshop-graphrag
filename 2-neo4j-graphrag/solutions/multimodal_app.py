@@ -52,3 +52,4 @@ for r in result.items:
     print(r.content, r.metadata.get("score"))
     print(r.metadata["poster"])
 # end::retriever[]
+driver.close()

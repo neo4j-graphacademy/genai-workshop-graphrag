@@ -23,7 +23,7 @@ from neo4j_graphrag.llm import OpenAILLM
 retriever = HybridRetriever(
     driver=driver,
     vector_index_name="moviePlots",
-    fulltext_index_name="plotFullText",
+    fulltext_index_name="plotFulltext",
     embedder=embedder,
     return_properties=["title", "plot"],
 )
