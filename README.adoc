@@ -3,3 +3,29 @@
 This repository accompanies the link:graphacademy.neo4j.com/courses/genai-workshop[Mastering Retrieval-Augmented Generation with the Neo4j GraphRAG Package^] on link:graphacademy.neo4j.com/courses/genai-workshop[GraphAcademy^].
 
 For a complete walkthrough of this repository, link:graphacademy.neo4j.com/courses/genai-workshop[enrol now^].
+
+
+# Test
+
+To run the solution tests: 
+
+. Create Neo4j instance with the `recommendations` dataset
+. Run the following Cypher scripts:
+.. link:https://raw.githubusercontent.com/neo4j-graphacademy/courses/refs/heads/main/asciidoc/courses/genai-workshop-graphrag/modules/1-knowledge-graphs-vectors/lessons/3-search-vector/reset.cypher[Add plot embeddings and create the vector index^].
+.. link:https://raw.githubusercontent.com/neo4j-graphacademy/courses/refs/heads/main/asciidoc/courses/genai-workshop-graphrag/modules/2-neo4j-graphrag/lessons/4-hybrid-retriever/reset.cypher[Create full text index^].
+.. link:https://raw.githubusercontent.com/neo4j-graphacademy/courses/refs/heads/main/asciidoc/courses/genai-workshop-graphrag/modules/1-knowledge-graphs-vectors/lessons/5-create-vector-index/reset.cypher[Create poster embeddings and vector index^].
+. Create a virtual environment and install the requirements.
++ 
+[source,sh]
+pip install -r requirements.txt
+. Install `pytest`
++
+[source,sh]
+pip install pytest
+. Create a `.env` file in the root directory. Use `.env.example` as a template.
+. Run the tests
++
+[source,sh]
+pytest 1-knowledge-graphs-vectors\solutions\
+pytest 2-neo4j-graphrag\solutions\
+
